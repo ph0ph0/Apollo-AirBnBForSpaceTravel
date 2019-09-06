@@ -1,4 +1,4 @@
-const { gql } = 'apollo-server'
+const { gql } = require('apollo-server')
 
 const typeDefs = gql`
 
@@ -6,7 +6,7 @@ const typeDefs = gql`
 
     type Query {
         launches: [Launch]!
-        launch(id: ID!): Saunch
+        launch(id: ID!): Launch
         # Queries for the current user
         me: User
     }
@@ -61,8 +61,8 @@ const typeDefs = gql`
         success: Boolean!
         message: String
         launches: [Launch]
-    }
-    `
+    }`
+    
     
 
 module.exports = typeDefs
