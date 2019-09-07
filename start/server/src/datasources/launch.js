@@ -36,6 +36,7 @@ class LaunchAPI extends RESTDataSource {
             type: launch.rocket.rocket_type
         }
 
+        //Here cursor is used for pagination and indicates from where the next set of paginated data should be obtained.
         return {
             id: launch.flight_number || 0,
             cursor: `${launch.launch_date_unix}`,

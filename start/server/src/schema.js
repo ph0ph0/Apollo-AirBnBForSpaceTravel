@@ -5,13 +5,29 @@ const typeDefs = gql`
     # ------Queries------
 
     type Query {
-        launches: [Launch]!
-        launch(id: ID!): Launch
+        launchesQuery(
+            # The no. of pages to show. Must be greater than 1. Default 20
+            pageSize: Int
+            # If you add a query here, it will only return results _after_ this query
+            after: String
+             ): LaunchConnection!
+        launchQuery(id: ID!): Launch
         # Queries for the current user
-        me: User
+        meQuery: User
+        Mission: Mission
     }
 
     # ------Objects------
+
+    """
+    Simple wrapper around our launches that contains a cursor to the last item in the list
+    Pass this query to the launchesQuery to fetch results after these.
+    """
+    type LaunchConnection {
+        cursor: String!
+        hasMore: Boolean!
+        launches: [Launch]!
+    }
 
     type Launch {
         id: ID!
@@ -35,7 +51,7 @@ const typeDefs = gql`
 
     type Mission {
         name: String
-        missionPatch(size: PatchSize): String
+        missionPatch(mission: String, size: PatchSize): String
     }
 
     enum PatchSize {
@@ -47,10 +63,10 @@ const typeDefs = gql`
 
     type Mutation {
         # If false, bookTrips failed, check errors!
-        bookTrips(launchIDs: [ID]!): TripUpdateResponse!
+        bookTrips(launchIds: [ID]!): TripUpdateResponse!
 
         # If false, cancelTrip failed, check errors!
-        cancelTrip(launchIDs: ID!): TripUpdateResponse!
+        cancelTrip(launchId: ID!): TripUpdateResponse!
 
         login(email: String): String #Login token
     }
