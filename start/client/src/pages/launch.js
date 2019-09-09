@@ -8,6 +8,11 @@ import { LaunchTileDataFragment } from './launches'
 export const getLaunchDetailsGQLQuery = gql`
   query getLaunchDetails($launchId: ID!) {
     launchQuery(id: $launchId) {
+      isInCart @client
+      site
+      rocket {
+        type
+      }
       ...LaunchTileFragment
     }
   }
