@@ -15,8 +15,8 @@ export default function LoginMutationComponents() {
   const [login, { loading, error }] = useMutation(
     LoginUserGQLMutation,
     {
-      onCompleted({loginToken}) {
-        localStorage.setItem('token', loginToken)
+      onCompleted({login}) {
+        localStorage.setItem('token', login)
         client.writeData({ data: {isLoggedIn: true }})
       }
     }

@@ -14,6 +14,8 @@ export default function Cart() {
   
   const { data, loading, error } = useQuery(getCartItemsGQLCacheQuery)
 
+  console.log(`!!!!!deadBeef data in CartComponent: ${data.cartItems}`)
+
   if (loading) return <Loading />
   if (error) return <p>Error: {error.message}</p>
 

@@ -38,12 +38,14 @@ export default function LaunchesQueryComponents() {
   if (loading) return <Loading />
   if (error) return <p>Error</p>
 
+  console.log(`^^^^data: ${data.launchesQuery.launches[0].id}`)
+
   return (
     <Fragment>
       <Header>
-        {data.launches &&
-          data.launches.launches &&
-            data.launches.launches.map(launch => (
+        {data.launchesQuery &&
+          data.launchesQuery.launches &&
+            data.launchesQuery.launches.map(launch => (
               <LaunchTile 
                 key = {launch.id}
                 launch = {launch}
@@ -51,13 +53,13 @@ export default function LaunchesQueryComponents() {
             ))}
       </Header>
       {
-          data.launches &&
-            data.launches.hasMore && (
+          data.launchesQuery &&
+            data.launchesQuery.hasMore && (
               <Button
                 onClick = {() => 
                   fetchMore({
                     variables: {
-                      after: data.launches.cursor
+                      after: data.launchesQuery.cursor
                     },
                     updateQuery: (prev, { fetchMoreResult, ...rest}) => {
                       if (!fetchMoreResult) return prev;

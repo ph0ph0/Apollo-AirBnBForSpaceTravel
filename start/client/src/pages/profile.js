@@ -6,7 +6,7 @@ import { LaunchTileDataFragment } from './launches'
 
 const getCurrentUsersTripsGQLQuery = gql`
   query GetCurrentUsersTrips {
-    me {
+    meQuery {
       id
       email
       trips {
@@ -18,6 +18,8 @@ const getCurrentUsersTripsGQLQuery = gql`
 `
 
 export default function ProfileQueryComponents() {
+
+  console.log(`Rendering profile query components`)
   
   const { data, loading, error } = useQuery(
     getCurrentUsersTripsGQLQuery,

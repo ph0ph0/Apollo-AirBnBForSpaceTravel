@@ -18,6 +18,9 @@ const bookTripsGQLQuery = gql`
 `
 
 export default function BookTrips({cartItems}) {
+
+  console.log(`!!!!!Items in cart when rendering BookTripsButton: ${cartItems}`)
+
   const [bookTrips, {data, loading, error}] = useMutation(
     bookTripsGQLQuery,
     {
@@ -31,8 +34,15 @@ export default function BookTrips({cartItems}) {
     }
   )
 
+  console.log(`@@@@Data: ${data}`)
+  console.log(`!!!!!data message in book-trips: ${
+    data ? 
+      data.bookTrips ?
+      data.bookTrips.message :
+      "No Message" :
+    `No data`}`)
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
+  if (error) return <p>Error in book-trips.js: {error.message}</p>
 
   return data && data.bookTrips && !data.bookTrips.success
     ? <p data-testid="message">

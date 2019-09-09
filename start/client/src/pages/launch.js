@@ -27,15 +27,15 @@ export default function LaunchQueryComponents({launchId}) {
   );
 
   if (loading) return <Loading />;
-  if (error) return <p>Error: {error.message} </p>
+  if (error) return <p>Error in Launch.js: {error.message} </p>
   
   return (
     <Fragment>
-      <Header image = {data.launch.mission.missionPatch}>
-        {data.launch.mission.name}
+      <Header image = {data.launchQuery.mission.missionPatch}>
+        {data.launchQuery.mission.name}
       </Header>
-      <LaunchDetail {...data.launch} />
-      <ActionButton {...data.launch} />
+      <LaunchDetail {...data.launchQuery} />
+      <ActionButton {...data.launchQuery} />
     </Fragment>
   )
 }

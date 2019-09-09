@@ -4,7 +4,7 @@ import { getCartItemsGQLCacheQuery } from './pages/cart';
 export const typeDefs = gql`
     extend type Query {
         isLoggedInQuery: Boolean!
-        cartItemsQuery: [ID!]!
+        cartItems: [ID!]!
     }
 
     extend type Launch {
@@ -24,6 +24,7 @@ export const resolvers = {
     },
     Mutation: {
         addOrRemoveFromCart: (_, {id}, {cache}) => {
+            console.log(`!!!!! adding/removing from cart`)
             const { cartItems } = cache.readQuery({ query: getCartItemsGQLCacheQuery });
             const data = {
                 cartItems: cartItems.includes(id)
